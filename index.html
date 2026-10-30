@@ -4371,20 +4371,15 @@ function sausPath(c) {
   c.bezierCurveTo(-6.2, 7, -9.1, 3.6, -9.4, -3); c.bezierCurveTo(-9.9, -16, -9.9, -38, -9.4, -53); c.bezierCurveTo(-9.2, -59.5, -6.4, -63.5, 0, -63.5); c.closePath();
 }
 function drawFace(c, A, pal, p) {
-  const tw = A.tw == null ? 1 : A.tw, fx = (1.6 + A.lookX * .7) * tw, ey = -45 + A.lookY * .5, col = pal.pupil;
+  const tw = A.tw == null ? 1 : A.tw, fx = (1.6 + A.lookX * .7) * tw, ey = -44 + A.lookY * .5, col = pal.pupil;
   if (p.dead) {
-    for (const dx of [-4.6, 4.6]) { ln(c, [fx + dx - 1.6, ey - 1.6, fx + dx + 1.6, ey + 1.6], col, 1.4); ln(c, [fx + dx + 1.6, ey - 1.6, fx + dx - 1.6, ey + 1.6], col, 1.4); }
-    ell(c, fx, ey + 3.6, 1.5, 1.1, 0, col); return;
+    for (const dx of [-4.9, 4.9]) { ln(c, [fx + dx - 1.5, ey - 1.5, fx + dx + 1.5, ey + 1.5], col, 1.3); ln(c, [fx + dx + 1.5, ey - 1.5, fx + dx - 1.5, ey + 1.5], col, 1.3); }
+    ln(c, [fx - 1.2, ey + 1.4, fx + 1.2, ey + 1.4], col, 1.2); return;
   }
-  ell(c, fx - 6.2, ey + 3.4, 2.1, 1.25, 0, pal.cheek); ell(c, fx + 6.2, ey + 3.4, 2.1, 1.25, 0, pal.cheek);
-  if (p.hurtT > 0) { ln(c, [fx - 6.4, ey - 1.7, fx - 3.6, ey, fx - 6.4, ey + 1.7], col, 1.4); ln(c, [fx + 6.4, ey - 1.7, fx + 3.6, ey, fx + 6.4, ey + 1.7], col, 1.4); }
-  else for (const dx of [-4.6, 4.6]) {
-    if (A.blink > .5) { c.beginPath(); c.moveTo(fx + dx - 1.8, ey); c.quadraticCurveTo(fx + dx, ey + 1.5, fx + dx + 1.8, ey); c.lineWidth = 1.3; c.strokeStyle = col; c.lineCap = 'round'; c.stroke(); }
-    else { ell(c, fx + dx, ey, 1.85, 2.45, 0, col); cir(c, fx + dx - .6, ey - 1, .72, '#FFFFFF'); cir(c, fx + dx + .55, ey + .9, .32, 'rgba(255,255,255,.7)'); }
-  }
-  if (A.hasT && !(p.hurtT > 0)) for (const s of [-1, 1]) ln(c, [fx + s * 6.2, ey - 4.2, fx + s * 3, ey - 3.3], col, 1.1);
-  if (p.dashT > 0 || p.hurtT > 0) { ell(c, fx, ey + 3.9, 1.5, 1.9, 0, col); ell(c, fx, ey + 4.8, .9, .7, 0, '#FF8A8A'); }
-  else { c.beginPath(); c.moveTo(fx - 1.9, ey + 2.5); c.quadraticCurveTo(fx, ey + 5, fx + 1.9, ey + 2.5); c.lineWidth = 1.2; c.strokeStyle = col; c.lineCap = 'round'; c.stroke(); }
+  if (p.hurtT > 0) { ln(c, [fx - 6.3, ey - 1.5, fx - 3.7, ey, fx - 6.3, ey + 1.5], col, 1.3); ln(c, [fx + 6.3, ey - 1.5, fx + 3.7, ey, fx + 6.3, ey + 1.5], col, 1.3); }
+  else for (const dx of [-4.9, 4.9]) { if (A.blink > .5) ln(c, [fx + dx - 1.5, ey, fx + dx + 1.5, ey], col, 1.3); else cir(c, fx + dx, ey, 1.75, col); }
+  c.beginPath(); c.moveTo(fx - 1.5, ey - .6); c.quadraticCurveTo(fx - 1.65, ey + 2.2, fx, ey + 2.2); c.quadraticCurveTo(fx + 1.65, ey + 2.2, fx + 1.5, ey - .6);
+  c.lineWidth = 1.15; c.strokeStyle = col; c.lineCap = 'round'; c.lineJoin = 'round'; c.stroke();
 }
 function drawBody(c, A, pal, p) {
   c.lineJoin = 'round';
